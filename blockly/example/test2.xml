@@ -1,0 +1,74 @@
+<xml xmlns="http://www.w3.org/1999/xhtml">
+  <variables>
+    <variable type="" id="cl[#0z(q(lo))M:W;?q?">Tom</variable>
+    <variable type="" id="937YwH?3^F#.:1BIXg,J">Nick</variable>
+  </variables>
+  <block type="chaincode_init" id="$3h.ky6L)Q,rks15BL.!" x="0" y="0">
+    <statement name="init_func">
+      <block type="set_value" id="u#ML5hTS5|~||TzK$|XZ">
+        <field name="check_set_security">TRUE</field>
+        <field name="data" id="cl[#0z(q(lo))M:W;?q?" variabletype="">Tom</field>
+        <value name="VARIABLE">
+          <block type="math_number" id="zAjez6EvI|ElTIdkYXe`">
+            <field name="NUM">500</field>
+          </block>
+        </value>
+        <next>
+          <block type="set_value" id="CR7NcDj`)c%zEZn1(Dbv">
+            <field name="check_set_security">TRUE</field>
+            <field name="data" id="937YwH?3^F#.:1BIXg,J" variabletype="">Nick</field>
+            <value name="VARIABLE">
+              <block type="math_number" id="^3V9*06saGo[D^)1y?Q.">
+                <field name="NUM">1000</field>
+              </block>
+            </value>
+          </block>
+        </next>
+      </block>
+    </statement>
+    <next>
+      <block type="chaincode_body" id="m9;L~72@o@tcH29ZjH0B">
+        <statement name="body_func">
+          <block type="chaincode_invoke" id="t%2I6F%{oSq8IR|07W0b">
+            <field name="check_invoke_security">TRUE</field>
+            <value name="user_A">
+              <block type="variables_get" id="gb+mNK1l(KTPhU35UO{c">
+                <field name="VAR" id="cl[#0z(q(lo))M:W;?q?" variabletype="">Tom</field>
+              </block>
+            </value>
+            <value name="user_B">
+              <block type="variables_get" id="W/haTn!zj%b^#Equ@hYl">
+                <field name="VAR" id="937YwH?3^F#.:1BIXg,J" variabletype="">Nick</field>
+              </block>
+            </value>
+            <value name="money_num">
+              <block type="math_number" id="U%21mzgawD?A=-4uggB$">
+                <field name="NUM">120.5</field>
+              </block>
+            </value>
+            <next>
+              <block type="chaincode_query" id="qtrxIdT~t=c,7`1.0+,^">
+                <field name="check_query_security">TRUE</field>
+                <value name="user_Query">
+                  <block type="variables_get" id="gCA[e*_X^e@@cME~uZgN">
+                    <field name="VAR" id="937YwH?3^F#.:1BIXg,J" variabletype="">Nick</field>
+                  </block>
+                </value>
+                <next>
+                  <block type="chaincode_delete" id="HP2~@L4F-Tp(=2+7(GCx">
+                    <field name="check_delete_security">TRUE</field>
+                    <value name="user_Delete">
+                      <block type="variables_get" id="}L`lO4q=^]*s(uehAtX?">
+                        <field name="VAR" id="cl[#0z(q(lo))M:W;?q?" variabletype="">Tom</field>
+                      </block>
+                    </value>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </statement>
+      </block>
+    </next>
+  </block>
+</xml>

@@ -1,0 +1,33 @@
+<xml xmlns="http://www.w3.org/1999/xhtml">
+  <variables>
+    <variable type="" id="!E!1?/*?#zF#cItA@9,X">people</variable>
+    <variable type="" id="D)@L?c;==Z,qO#2wxv_p">A</variable>
+  </variables>
+  <block type="chaincode_init" id="=F)NC:Xp+v*^3Y]~X?we" x="113" y="13">
+    <statement name="init_func">
+      <block type="set_value" id="Ehbb4!tTFr4)h`#zz[$k">
+        <field name="check_set_security">TRUE</field>
+        <field name="data" id="!E!1?/*?#zF#cItA@9,X" variabletype="">people</field>
+        <value name="VARIABLE">
+          <shadow type="math_number" id="}E$=Po8M^lNW,ld_tZgd">
+            <field name="NUM">20</field>
+          </shadow>
+        </value>
+      </block>
+    </statement>
+    <next>
+      <block type="chaincode_body" id="3foWp^@B-t^]cja$_gxX">
+        <statement name="body_func">
+          <block type="chaincode_query" id="Q(FOZ[Hs9hbkXZQK7*XR">
+            <field name="check_query_security">TRUE</field>
+            <value name="user_Query">
+              <shadow type="variables_get" id="[u]!h_@8#r|bpD7,^KHj">
+                <field name="VAR" id="D)@L?c;==Z,qO#2wxv_p" variabletype="">A</field>
+              </shadow>
+            </value>
+          </block>
+        </statement>
+      </block>
+    </next>
+  </block>
+</xml>

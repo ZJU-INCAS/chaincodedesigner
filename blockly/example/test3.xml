@@ -1,0 +1,124 @@
+<xml xmlns="http://www.w3.org/1999/xhtml">
+  <variables>
+    <variable type="" id=";9?NIAf7A9c$pm?xaf8b">Tom</variable>
+    <variable type="" id="[N6MYneoP3YZLGFdE,}f">Nick</variable>
+  </variables>
+  <block type="chaincode_init" id="Ee|dO+A7gZtz8KA~#Hg3" x="-162" y="-112">
+    <statement name="init_func">
+      <block type="set_value" id="k0e*N,MJ]-Tt~q?10Mc-">
+        <field name="check_set_security">TRUE</field>
+        <field name="data" id=";9?NIAf7A9c$pm?xaf8b" variabletype="">Tom</field>
+        <value name="VARIABLE">
+          <block type="math_number" id="h^_n_D^L06k_PHT.y8AC">
+            <field name="NUM">500</field>
+          </block>
+        </value>
+        <next>
+          <block type="set_value" id="~[0la2[9!MVIH``3O7:c">
+            <field name="check_set_security">TRUE</field>
+            <field name="data" id="[N6MYneoP3YZLGFdE,}f" variabletype="">Nick</field>
+            <value name="VARIABLE">
+              <block type="math_number" id="9Y]4uAS($8K?1e%cGSS5">
+                <field name="NUM">1000</field>
+              </block>
+            </value>
+          </block>
+        </next>
+      </block>
+    </statement>
+    <next>
+      <block type="chaincode_body" id="{rW^uMF/P3K|?HkO+2[3">
+        <statement name="body_func">
+          <block type="controls_repeat_ext" id="XW2dvIf;V02__7i#Z0,B">
+            <value name="TIMES">
+              <shadow type="math_number" id="vCIc{}o20rm!xZ/s%|Co">
+                <field name="NUM">10</field>
+              </shadow>
+            </value>
+            <statement name="DO">
+              <block type="chaincode_invoke" id="=s(r!C`iUPoXs=PaAopl">
+                <field name="check_invoke_security">TRUE</field>
+                <value name="user_A">
+                  <block type="variables_get" id="V(iE8#jB:q7QCf~.UEw@">
+                    <field name="VAR" id=";9?NIAf7A9c$pm?xaf8b" variabletype="">Tom</field>
+                  </block>
+                </value>
+                <value name="user_B">
+                  <block type="variables_get" id="+dga6/=;{LMJ%dgi4uc`">
+                    <field name="VAR" id="[N6MYneoP3YZLGFdE,}f" variabletype="">Nick</field>
+                  </block>
+                </value>
+                <value name="money_num">
+                  <block type="math_arithmetic" id="8g]%j`!8(+4OkH}*aG+P">
+                    <field name="OP">ADD</field>
+                    <value name="A">
+                      <shadow type="math_number" id="miF%aa`nFIFK,{bU*l)0">
+                        <field name="NUM">10</field>
+                      </shadow>
+                    </value>
+                    <value name="B">
+                      <shadow type="math_number" id="=OE?kaH|)9=9#]12}5Y4">
+                        <field name="NUM">1</field>
+                      </shadow>
+                    </value>
+                  </block>
+                </value>
+              </block>
+            </statement>
+            <next>
+              <block type="chaincode_query" id="u/k:!vFDDt2,z]ErI%S|">
+                <field name="check_query_security">TRUE</field>
+                <value name="user_Query">
+                  <block type="variables_get" id="-Evb~n15jy/msMYd84vN">
+                    <field name="VAR" id="[N6MYneoP3YZLGFdE,}f" variabletype="">Nick</field>
+                  </block>
+                </value>
+                <next>
+                  <block type="text_print" id="*N$;d%@0Vv)Ps1WgQO[_">
+                    <value name="TEXT">
+                      <shadow type="text" id="-}SY$jEHP?JInVeCsy;C">
+                        <field name="TEXT">abc</field>
+                      </shadow>
+                      <block type="variables_get" id="O#h:v9Wo.HlH%H$F8miU">
+                        <field name="VAR" id="[N6MYneoP3YZLGFdE,}f" variabletype="">Nick</field>
+                      </block>
+                    </value>
+                    <next>
+                      <block type="controls_if" id="~~qXnh?-suNBH!kKR$l(">
+                        <value name="IF0">
+                          <block type="logic_compare" id="`=9ymG18KjdSkNu#8^WD">
+                            <field name="OP">EQ</field>
+                            <value name="A">
+                              <block type="variables_get" id="r4,H?N`:2jHabP~Ovu}G">
+                                <field name="VAR" id="[N6MYneoP3YZLGFdE,}f" variabletype="">Nick</field>
+                              </block>
+                            </value>
+                            <value name="B">
+                              <block type="math_number" id="61-8/;8QQI*n0QY3^ey+">
+                                <field name="NUM">0</field>
+                              </block>
+                            </value>
+                          </block>
+                        </value>
+                        <statement name="DO0">
+                          <block type="chaincode_delete" id="xt4CPJ0KQVLbFlm_U4=i">
+                            <field name="check_delete_security">TRUE</field>
+                            <value name="user_Delete">
+                              <block type="variables_get" id="a5}Dt)ikL[rlla0p3o59">
+                                <field name="VAR" id=";9?NIAf7A9c$pm?xaf8b" variabletype="">Tom</field>
+                              </block>
+                            </value>
+                          </block>
+                        </statement>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </statement>
+      </block>
+    </next>
+  </block>
+</xml>
