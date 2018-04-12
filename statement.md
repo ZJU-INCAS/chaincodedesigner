@@ -1,6 +1,6 @@
 #not a full version
 This is the copy from Incas.old\
-a branch from smileweiwei/ChaincodeDesigner\
+a branch from smileweiwei/ChaincodeDesigner
 
 #The old version readme.md is as follow:
 # ChaincodeDesigner
