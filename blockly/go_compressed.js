@@ -329,6 +329,8 @@ Blockly.Go.chaincode_invoke = function(block) {
 	var money = Blockly.Go.valueToCode(block, 'money_num', Blockly.Go.ORDER_ATOMIC);
 	if (money[0]=="-"){
 		alert("转账金额不能为负");
+	}else if(money.length>9){
+		alert("金额超限(单笔限额十亿)");
 	}
 	// TODO: Assemble Go into code variable.	
 	var code = 'func (t *SimpleChaincode) invoke(stub shim.ChaincodeStub, args []string) ([]byte, error) {\n';
