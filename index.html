@@ -11,12 +11,14 @@
 	<script src="blockly/blocks/chaincode.js"></script>
 	<!--
 		<script src="blockly/blocks/loop.js"></script>
-    -->
+	-->
+	
 	<link href="blockly/blockly_css.css" rel="stylesheet">
 </head>
 
 <body>
-	<div class="firstline"> Chaincode Designer beta V0.0.3
+	
+	<div class="firstline" onload="hello();"> Chaincode Designer beta V0.0.3
 		<button onClick="deleteWorkspace()" id="trashButton" class="space"> <img src='blockly/media/1x1.gif' class="trash icon21"> </button>
 		<button id="linkButton" class="space"> <img src='blockly/media/1x1.gif' class="link icon21"> </button>
 		<button onClick="loadWorkspace()" class="space">Reload Blocks</button>
@@ -59,7 +61,7 @@
 	</div>
 	<div style="display:none" id="playButton" class="play-button material-icons">Run</div>
 	<xml id="toolbox" style="display: none">
-		<category name=" Init " colour="100" expanded="false">
+		<category name=" 初始化 " colour="100" expanded="false">
 			<block type="chaincode_init"></block>
 			<block type="chaincode_init">
 				<next>
@@ -68,7 +70,7 @@
 			</block>
 			<block type="chaincode_init_body" disabled="true"></block>
 		</category>
-		<category name=" Body " colour="200">
+		<category name=" 主体 " colour="200">
 			<block type="chaincode_body"></block>
 			<block type="chaincode_init_body" disabled="true"></block>
 		</category>
@@ -86,7 +88,7 @@
 		<category id="catVariables" colour="245" custom="VARIABLE" name=" 变量　">
 		</category>
 		<sep></sep>
-		<category colour="331" name=" 样例　">
+		<category colour="331" name=" 合约样例">
 			<category name="查询 ">
 				<block type="chaincode_init">
 					<statement name="init_func">
@@ -114,7 +116,7 @@
 					</next>
 				</block>
 			</category>
-			<category name="基本交易 ">
+			<category name="交易">
 				<block type="chaincode_init">
 					<statement name="init_func">
 						<block type="set_value">
@@ -181,7 +183,7 @@
 			</category>
 			
 
-			<category name="发币 ">
+			<category name="发币">
 				<block type="chaincode_init">
 					<statement name="init_func">
 						<block type="chaincode_query">
@@ -515,6 +517,9 @@
 			//onClick="workspace.zoomCenter(-1)" 缩小
 			//<div id="playButton" class="play-button material-icons">run</div>
 		};
+	</script>
+	<script>
+		alert("欢迎使用智能合约编辑器BETA版\n本工具初步支持智能合约的可视化生成和简单的漏洞检测\n暂时支持Go语言和自然语言版本,Solidity版本仍在开发中\n ");
 	</script>
 	<div class="lastline">  Developer: 徐霄雯 李珏宇 付博 &nbsp;&nbsp;&nbsp;&nbsp; | &nbsp;&nbsp; Producer: 陈建海 王备 黄步添 &nbsp;&nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;Special thanks to: 蔡庆鹏 &nbsp;&nbsp;&nbsp;&nbsp; | &nbsp;&nbsp; Laboratory: ZJU-INCAS </div>
 </body>
