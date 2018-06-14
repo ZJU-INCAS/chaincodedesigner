@@ -16,7 +16,7 @@
 </head>
 
 <body>
-	<div class="firstline"> Chaincode Designer beta V0.0.1
+	<div class="firstline"> Chaincode Designer beta V0.0.3
 		<button onClick="deleteWorkspace()" id="trashButton" class="space"> <img src='blockly/media/1x1.gif' class="trash icon21"> </button>
 		<button id="linkButton" class="space"> <img src='blockly/media/1x1.gif' class="link icon21"> </button>
 		<button onClick="loadWorkspace()" class="space">Reload Blocks</button>
@@ -35,6 +35,7 @@
 				<div id="im-just-an-underline">
 					<select id="languageDropdown1" class="languageDropdown" onChange="myUpdateFunction();">
 						<option value="Go" selected="selected">Go</option>
+						<option value="Solidity">Solidity</option>
 						<option value="Natural">Natural</option>
 					</select>
 				</div>
@@ -47,6 +48,7 @@
 				<div id="im-just-an-underline">
 					<select id="languageDropdown2" class="languageDropdown" onChange="myUpdateFunction();">
 						<option value="Go">Go</option>
+						<option value="Solidity">Solidity</option>
 						<option value="Natural" selected="selected">Natural</option>
 					</select>
 				</div>
@@ -55,9 +57,9 @@
 			<pre></pre>
 		</div>
 	</div>
-	<div id="playButton" class="play-button material-icons">Run</div>
+	<div style="display:none" id="playButton" class="play-button material-icons">Run</div>
 	<xml id="toolbox" style="display: none">
-		<category name="Init " colour="100" expanded="false">
+		<category name=" Init " colour="100" expanded="false">
 			<block type="chaincode_init"></block>
 			<block type="chaincode_init">
 				<next>
@@ -66,22 +68,26 @@
 			</block>
 			<block type="chaincode_init_body" disabled="true"></block>
 		</category>
-		<category name="Body " colour="200">
+		<category name=" Body " colour="200">
 			<block type="chaincode_body"></block>
 			<block type="chaincode_init_body" disabled="true"></block>
 		</category>
-		<category name="Term " colour="300">
+		<sep gap="32"></sep>
+		<category name=" 组件　" colour="300">
 			<block type="chaincode_invoke"></block>
 			<block type="chaincode_query"></block>
 			<block type="chaincode_delete"></block>
 			<block type="set_value"></block>
 			<block type="math_number"></block>
+			<block type="math_single"></block>
+			<block type="math_constrain"></block>
 		</category>
-		<sep gap="32"></sep>
-		<category id="catVariables" colour="330" custom="VARIABLE" name="Variables "></category>
+		
+		<category id="catVariables" colour="245" custom="VARIABLE" name=" 变量　">
+		</category>
 		<sep></sep>
-		<category colour="220" name="Example ">
-			<category name="Example01 ">
+		<category colour="331" name=" 样例　">
+			<category name="查询 ">
 				<block type="chaincode_init">
 					<statement name="init_func">
 						<block type="set_value">
@@ -108,7 +114,7 @@
 					</next>
 				</block>
 			</category>
-			<category name="Example02 ">
+			<category name="基本交易 ">
 				<block type="chaincode_init">
 					<statement name="init_func">
 						<block type="set_value">
@@ -163,6 +169,100 @@
 															<field name="VAR">B</field>
 														</shadow>
 													</value>
+												</block>
+											</next>
+										</block>
+									</next>
+								</block>
+						</block>
+					</next>
+					</statement>
+				</block>
+			</category>
+			
+
+			<category name="发币 ">
+				<block type="chaincode_init">
+					<statement name="init_func">
+						<block type="chaincode_query">
+							<value name="user_Query">
+								<shadow type="variables_get">
+									<field name="VAR">Bank</field>
+								</shadow>
+							</value>
+							<next>
+								
+								<block type="chaincode_query">
+									<value name="user_Query">
+										<shadow type="variables_get">
+											<field name="VAR">A</field>
+										</shadow>
+									</value>
+								<next>
+									<block type="set_value">
+										<field name="data">temp</field>
+										<value name="VARIABLE">
+											<shadow type="math_number">
+												<field name="NUM">0</field>
+											</shadow>
+										</value>
+									</block>
+								</next>
+							</next>
+						</block>
+					</statement>
+					<next>
+						<block type="chaincode_body">
+							<statement name="body_func">
+								<block type="chaincode_invoke">
+									<value name="user_A">
+										<shadow type="variables_get">
+											<field name="VAR">Bank</field>
+										</shadow>
+									</value>
+									<value name="user_B">
+										<shadow type="variables_get">
+											<field name="VAR">temp</field>
+										</shadow>
+									</value>
+									<value name="money_num">
+										<shadow type="math_number">
+											<field name="NUM">50</field>
+										</shadow>
+									</value>
+									<next>
+										<block type="chaincode_invoke">
+											<value name="user_B">
+												<shadow type="variables_get">
+													<field name="VAR">temp</field>
+												</shadow>
+											</value>
+											<value name="user_A">
+												<shadow type="variables_get">
+													<field name="VAR">A</field>
+												</shadow>
+											</value>
+											<value name="money_num">
+												<shadow type="math_number">
+													<field name="NUM">50</field>
+												</shadow>
+											</value>
+											<next>
+												<block type="chaincode_query">
+													<value name="user_Query">
+														<shadow type="variables_get">
+															<field name="VAR">A</field>
+														</shadow>
+													</value>
+													<next>
+														<block type="chaincode_delete">
+															<value name="user_Delete">
+																<shadow type="variables_get">
+																	<field name="VAR">temp</field>
+																</shadow>
+															</value>
+														</block>
+													</next>
 												</block>
 											</next>
 										</block>
@@ -294,7 +394,7 @@
 		});
 
 		function executeBlockCode() {
-			window.alert("exe");
+			window.alert("waiting completement");
 		}
 		document.getElementById("playButton").addEventListener("click", executeBlockCode);
 
@@ -413,7 +513,7 @@
 			//onClick="workspace.scrollCenter()" 居中
 			//onClick="workspace.zoomCenter(1)" 放大
 			//onClick="workspace.zoomCenter(-1)" 缩小
-			//  <div id="playButton" class="play-button material-icons">run</div>
+			//<div id="playButton" class="play-button material-icons">run</div>
 		};
 	</script>
 	<div class="lastline">  Developer: 徐霄雯 李珏宇 付博 &nbsp;&nbsp;&nbsp;&nbsp; | &nbsp;&nbsp; Producer: 陈建海 王备 黄步添 &nbsp;&nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;Special thanks to: 蔡庆鹏 &nbsp;&nbsp;&nbsp;&nbsp; | &nbsp;&nbsp; Laboratory: ZJU-INCAS </div>

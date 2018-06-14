@@ -61,6 +61,7 @@ Blockly.defineBlocksWithJsonArray([  // BEGIN JSON EXTRACT
     "extensions": ["parent_tooltip_when_inline"]
   },
 
+
   // Block for basic arithmetic operator.
   {
     "type": "math_arithmetic",
@@ -104,8 +105,8 @@ Blockly.defineBlocksWithJsonArray([  // BEGIN JSON EXTRACT
         "type": "field_dropdown",
         "name": "OP",
         "options": [
-          ["%{BKY_MATH_SINGLE_OP_ROOT}", 'ROOT'],
           ["%{BKY_MATH_SINGLE_OP_ABSOLUTE}", 'ABS'],
+          ["%{BKY_MATH_SINGLE_OP_ROOT}", 'ROOT'],
           ['-', 'NEG'],
           ['ln', 'LN'],
           ['log10', 'LOG10'],
@@ -393,8 +394,8 @@ Blockly.Constants.Math.TOOLTIPS_BY_OP = {
   'POWER': '%{BKY_MATH_ARITHMETIC_TOOLTIP_POWER}',
 
   // math_simple
-  'ROOT': '%{BKY_MATH_SINGLE_TOOLTIP_ROOT}',
   'ABS': '%{BKY_MATH_SINGLE_TOOLTIP_ABS}',
+  'ROOT': '%{BKY_MATH_SINGLE_TOOLTIP_ROOT}',
   'NEG': '%{BKY_MATH_SINGLE_TOOLTIP_NEG}',
   'LN': '%{BKY_MATH_SINGLE_TOOLTIP_LN}',
   'LOG10': '%{BKY_MATH_SINGLE_TOOLTIP_LOG10}',

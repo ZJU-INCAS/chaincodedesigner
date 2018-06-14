@@ -327,6 +327,9 @@ Blockly.Go.chaincode_invoke = function(block) {
 	var usera_name = Blockly.Go.valueToCode(block, 'user_A', Blockly.Go.ORDER_ATOMIC);
 	var userb_name = Blockly.Go.valueToCode(block, 'user_B', Blockly.Go.ORDER_ATOMIC);
 	var money = Blockly.Go.valueToCode(block, 'money_num', Blockly.Go.ORDER_ATOMIC);
+	if (money[0]=="-"){
+		alert("转账金额不能为负");
+	}
 	// TODO: Assemble Go into code variable.	
 	var code = 'func (t *SimpleChaincode) invoke(stub shim.ChaincodeStub, args []string) ([]byte, error) {\n';
 	code += '    fmt.Printf("Running invoke")\n';
