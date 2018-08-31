@@ -7,6 +7,7 @@
 	<script src="blockly/blocks_compressed.js"></script>
 	<script src="blockly/msg/js/en.js"></script>
 	<script src="blockly/go_compressed.js"></script>
+	<script src='blockly/solidity_compressed.js'></script>
 	<script src="blockly/natural_compressed.js"></script>
 	<script src="blockly/blocks/chaincode.js"></script>
 	<!--
@@ -18,7 +19,7 @@
 
 <body>
 	
-	<div class="firstline" onload="hello();"> Chaincode Designer beta V0.0.3
+	<div class="firstline" onload="hello();"> Chaincode Designer beta V0.0.4
 		<button onClick="deleteWorkspace()" id="trashButton" class="space"> <img src='blockly/media/1x1.gif' class="trash icon21"> </button>
 		<button id="linkButton" class="space"> <img src='blockly/media/1x1.gif' class="link icon21"> </button>
 		<button onClick="loadWorkspace()" class="space">Reload Blocks</button>
@@ -31,11 +32,11 @@
 		<button onClick="Blockly.mainWorkspace.undo(true)" class="space">Redo</button>
 	</div>
 	<div class="app-container">
-		<div id="blocklyDiv" class="main blockly-panel"></div>
-		<div id="codeDiv1" class="main output-panel">
+		<div id="blocklyDiv" class="main blockly-panel" style="width:55%"></div>
+		<div id="codeDiv" class="main output-panel"style="width:42.5%;height:96.5%" >
 			<div class="dropdown-bar"> Language:
 				<div id="im-just-an-underline">
-					<select id="languageDropdown1" class="languageDropdown" onChange="myUpdateFunction();">
+					<select id="languageDropdown" class="languageDropdown" onChange="myUpdateFunction();">
 						<option value="Go" selected="selected">Go</option>
 						<option value="Solidity">Solidity</option>
 						<option value="Natural">Natural</option>
@@ -45,7 +46,7 @@
 			<hr class="POps">
 			<pre></pre>
 		</div>
-		<div id="codeDiv2" class="main output-panel-natural">
+		<div id="codeDiv2" class="main output-panel-natural"style="display: none;">
 			<div class="dropdown-bar"> Language:
 				<div id="im-just-an-underline">
 					<select id="languageDropdown2" class="languageDropdown" onChange="myUpdateFunction();">
@@ -62,30 +63,29 @@
 	<div style="display:none" id="playButton" class="play-button material-icons">Run</div>
 	<xml id="toolbox" style="display: none">
 		<category name=" 初始化 " colour="100" expanded="false">
-			<block type="chaincode_init"></block>
 			<block type="chaincode_init">
 				<next>
 					<shadow type="chaincode_body"> </shadow>
 				</next>
 			</block>
-			<block type="chaincode_init_body" disabled="true"></block>
 		</category>
 		<category name=" 主体 " colour="200">
 			<block type="chaincode_body"></block>
-			<block type="chaincode_init_body" disabled="true"></block>
 		</category>
 		<sep gap="32"></sep>
-		<category name=" 组件　" colour="300">
+		
+		<category name=' 变量' colour='135'>
+			<block type="math_number"></block>
+		</category>
+
+		<category id="catVariables" colour="245" custom="VARIABLE" name=" 组件">
+		</category>
+		<category name=" 函数" colour="300">
 			<block type="chaincode_invoke"></block>
 			<block type="chaincode_query"></block>
 			<block type="chaincode_delete"></block>
 			<block type="set_value"></block>
-			<block type="math_number"></block>
-			<block type="math_single"></block>
-			<block type="math_constrain"></block>
-		</category>
-		
-		<category id="catVariables" colour="245" custom="VARIABLE" name=" 变量　">
+			<category name=" 创建函数" colour='250' custom='PROCEDURE'></category>
 		</category>
 		<sep></sep>
 		<category colour="331" name=" 合约样例">
@@ -281,7 +281,7 @@
 		<block type="chaincode_init">
 			<statement name="init_func">
 				<block type="set_value">
-					<field name="data">Tom</field>
+					<field name="data">A</field>
 					<value name="VARIABLE">
 						<block type="math_number">
 							<field name="NUM">500</field>
@@ -289,7 +289,7 @@
 					</value>
 					<next>
 						<block type="set_value">
-							<field name="data">Nick</field>
+							<field name="data">B</field>
 							<value name="VARIABLE">
 								<block type="math_number">
 									<field name="NUM">1000</field>
@@ -299,38 +299,100 @@
 					</next>
 				</block>
 			</statement>
-			<next>
+			<next><block type="chaincode_init">
+					<statement name="init_func">
+						<block type="set_value">
+							<field name="data">A</field>
+							<value name="VARIABLE">
+								<shadow type="math_number">
+									<field name="NUM">100</field>
+								</shadow>
+							</value>
+							<next>
+								<block type="set_value">
+									<field name="data">B</field>
+									<value name="VARIABLE">
+										<shadow type="math_number">
+											<field name="NUM">200</field>
+										</shadow>
+									</value>
+								</block>
+							</next>
+						</block>
+					</statement>
+					<next>
+						<block type="chaincode_body">
+							<statement name="body_func">
+								<block type="chaincode_invoke">
+									<value name="user_A">
+										<shadow type="variables_get">
+											<field name="VAR">A</field>
+										</shadow>
+									</value>
+									<value name="user_B">
+										<shadow type="variables_get">
+											<field name="VAR">B</field>
+										</shadow>
+									</value>
+									<value name="money_num">
+										<shadow type="math_number">
+											<field name="NUM">50</field>
+										</shadow>
+									</value>
+									<next>
+										<block type="chaincode_query">
+											<value name="user_Query">
+												<shadow type="variables_get">
+													<field name="VAR">A</field>
+												</shadow>
+											</value>
+											<next>
+												<block type="chaincode_delete">
+													<value name="user_Delete">
+														<shadow type="variables_get">
+															<field name="VAR">B</field>
+														</shadow>
+													</value>
+												</block>
+											</next>
+										</block>
+									</next>
+								</block>
+						</block>
+					</next>
+					</statement>
+				</block>
 				<block type="chaincode_body">
 					<statement name="body_func">
 						<block type="chaincode_invoke">
 							<value name="user_A">
-								<block type="variables_get">
-									<field name="VAR">Tom</field>
-								</block>
+								<shadow type="variables_get">
+									<field name="VAR">A</field>
+								</shadow>
 							</value>
 							<value name="user_B">
-								<block type="variables_get">
-									<field name="VAR">Nick</field>
-								</block>
+								<shadow type="variables_get">
+									<field name="VAR">B</field>
+								</shadow>
 							</value>
 							<value name="money_num">
-								<block type="math_number">
-									<field name="NUM">120.5</field>
-								</block>
+								<shadow type="math_number">
+									<field name="NUM">50</field>
+								</shadow>
 							</value>
 							<next>
 								<block type="chaincode_query">
 									<value name="user_Query">
-										<block type="variables_get">
-											<field name="VAR">Nick</field>
-										</block>
+										<shadow type="variables_get">
+											<field name="VAR">A</field>
+										</shadow>
 									</value>
 									<next>
 										<block type="chaincode_delete">
 											<value name="user_Delete">
-												<block type="variables_get">
-													<field name="VAR">Tom</field>
-												</block>
+												<shadow type="variables_get">
+													<field name="VAR">B</field>
+												</shadow>
 											</value>
 										</block>
 									</next>
@@ -351,8 +413,8 @@
 		var workspace = Blockly.inject('blocklyDiv', {
 			grid: {
 				spacing: 25,
-				length: 25,
-				colour: '#ccc',
+				length: 0,
+				colour: '#0000',
 				snap: true
 			},
 			media: 'blockly/media/',
@@ -367,27 +429,17 @@
 		});
 		var defaultBlocks = document.getElementById('blocklyDefault');
 		Blockly.Xml.domToWorkspace(defaultBlocks, workspace);
-
+		workspace.scrollCenter();
 		function myUpdateFunction(event) {
-			var languageDropdown = document.getElementById('languageDropdown1');
+			var languageDropdown = document.getElementById('languageDropdown');
 			var languageSelection = languageDropdown.options[languageDropdown.selectedIndex].value;
-			var codeDiv = document.getElementById('codeDiv1');
+			var codeDiv = document.getElementById('codeDiv');
 			var codeHolder = document.createElement('pre');
 			codeHolder.id = 'code1';
 			codeHolder.className = 'prettyprint but-not-that-pretty';
 			var code = document.createTextNode(Blockly[languageSelection].workspaceToCode(workspace));
 			codeHolder.appendChild(code);
-			codeDiv1.replaceChild(codeHolder, codeDiv1.lastElementChild);
-
-			languageDropdown = document.getElementById('languageDropdown2');
-			languageSelection = languageDropdown.options[languageDropdown.selectedIndex].value;
-			codeDiv = document.getElementById('codeDiv2');
-			codeHolder = document.createElement('pre');
-			codeHolder.id = 'code2';
-			codeHolder.className = 'prettyprint but-not-that-pretty';
-			code = document.createTextNode(Blockly[languageSelection].workspaceToCode(workspace));
-			codeHolder.appendChild(code);
-			codeDiv2.replaceChild(codeHolder, codeDiv2.lastElementChild);
+			codeDiv.replaceChild(codeHolder, codeDiv.lastElementChild);
 		}
 		workspace.addChangeListener(myUpdateFunction);
 
@@ -519,7 +571,7 @@
 		};
 	</script>
 	<script>
-		alert("欢迎使用智能合约编辑器BETA版\n本工具初步支持智能合约的可视化生成和简单的漏洞检测\n暂时支持Go语言和自然语言版本,Solidity版本仍在开发中\n ");
+		//alert("欢迎使用智能合约编辑器BETA版\n本工具初步支持智能合约的可视化生成和简单的漏洞检测\n暂时支持Go语言和自然语言版本,Solidity版本仍在完善\n ");
 	</script>
 	<div class="lastline">  Developer: 徐霄雯 李珏宇 付博 &nbsp;&nbsp;&nbsp;&nbsp; | &nbsp;&nbsp; Producer: 陈建海 王备 黄步添 &nbsp;&nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;Special thanks to: 蔡庆鹏 &nbsp;&nbsp;&nbsp;&nbsp; | &nbsp;&nbsp; Laboratory: ZJU-INCAS </div>
 </body>
