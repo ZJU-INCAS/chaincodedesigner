@@ -105,7 +105,7 @@ Blockly.Solidity.finish = function(code) {
 	delete Blockly.Solidity.functionNames_;
 	Blockly.Solidity.variableDB_.reset();
 	var contractName = 'contractName';
-	return 'pragma solidity ^0.4.0;\n\n' + 'contract ' + contractName + '{\n  '+ code +'}\n'+ '\n\n'  ;
+	return 'pragma solidity ^0.5.0;\n\n' + 'contract ' + contractName + '{\n  '+ code +'}\n'+ '\n\n'  ;
 	//return 'package main\n' + 'import(\n' + imports.join('\n') + ')' + '\n\ntype SimpleChaincode struct {}\n'+ '\n\n'  + code;
 };
 
@@ -246,8 +246,7 @@ Blockly.Solidity.getAdjusted = function(block, atId, opt_delta, opt_negate,
 Blockly.Solidity.chaincode_init = function(block) {
 	// TODO: Assemble Solidity into code variable.
 	var code = '';
-	code += 'function init (t *SimpleChaincode) return (stub shim.ChaincodeStubInterface){ \n';
-	code += '    fmt.Println("ex02 Init")\n';
+	code += `constructor(address account) Ownable(account) public {}\n`;
 	var branch = Blockly.Solidity.statementToCode(block, 'init_func');
 	branch = Blockly.Solidity.addLoopTrap(branch, block.id);
 	code += branch;
@@ -258,23 +257,8 @@ Blockly.Solidity.chaincode_init = function(block) {
 
 Blockly.Solidity.chaincode_body = function(block) {
 	// TODO: Assemble Solidity into code variable.
-	var code = 'function bodyFunc (t *SimpleChaincode) return (stub *shim.ChaincodeStub, function string, args []string)  {\n';
-	code += '    fmt.Println("ex02 Invoke")\n';
-	code += '    if function == "invoke" {\n';
-	code += '      fmt.Printf("Function is invoke")\n';
-	code += '      return t.invoke(stub, args)\n';
-	code += '    } else if function == "init" {\n';
-	code += '      fmt.Printf("Function is init")\n';
-	code += '      return t.Init(stub, function, args)\n';
-	code += '    } else if function == "delete" {\n';
-	code += '      fmt.Printf("Function is delete")\n';
-	code += '      return t.delete(stub, args)\n';
-	code += '    } else if function == "query" {\n';
-	code += '      fmt.Printf("Function is query")\n';
-	code += '      return t.query(stub, args)\n';
-	code += '    }\n';
-	code += '    return shim.Error("Invalid invoke function name. Expecting \\\"invoke\\\" \\\"delete\\\" \\\"query\\\"")\n';
-	code += '}\n';
+	var code = `
+		solidity body\n`;
 
 	var branch = Blockly.Solidity.statementToCode(block, 'body_func');
 	branch = Blockly.Solidity.addLoopTrap(branch, block.id);
@@ -295,25 +279,13 @@ Blockly.Solidity.chaincode_init_body = function(block) {
 	var branch = Blockly.Solidity.statementToCode(block, 'init_func');
 	branch = Blockly.Solidity.addLoopTrap(branch, block.id);
 	code += branch;
-	code += 'return shim.Success(nil)\n}\n';
+	code += 'return shim.Sufffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffccess(nil)\n}\n';
 	
-	code += 'function  (t *SimpleChaincode) Invoke(stub *shim.ChaincodeStub, function string, args []string) ([]byte, error) {\n';
-	//code += '    fmt.Println("ex02 Invoke")\n';
-	code += '    if function == "invoke" {\n';
-	//code += '      fmt.Printf("Function is invoke")\n';
-	code += '      return t.invoke(stub, args)\n';
-	code += '    } else if function == "init" {\n';
-	//code += '      fmt.Printf("Function is init")\n';
-	code += '      return t.Init(stub, function, args)\n';
-	code += '    } else if function == "delete" {\n';
-	//code += '      fmt.Printf("Function is delete")\n';
-	code += '      return t.delete(stub, args)\n';
-	code += '    } else if function == "query" {\n';
-	//code += '      fmt.Printf("Function is query")\n';
-	code += '      return t.query(stub, args)\n';
-	code += '    }\n';
-	code += '    return shim.Error("Invalid invoke function name. Expecting \\\"invoke\\\" \\\"delete\\\" \\\"query\\\"")\n';
-	code += '}\n';
+	code += `fhasdfasdfas
+	fadfadf
+	adfasdfas
+	asdfasdfasdf
+	adfasdfas`;
 
 	var branch = Blockly.Solidity.statementToCode(block, 'body_func');
 	branch = Blockly.Solidity.addLoopTrap(branch, block.id);
@@ -335,44 +307,9 @@ Blockly.Solidity.chaincode_invoke = function(block) {
 		alert("金额超限！");
 	}
 	// TODO: Assemble Solidity into code variable.	
-	var code = 'func (t *SimpleChaincode) invoke(stub shim.ChaincodeStub, args []string) ([]byte, error) {\n';
-	code += '    fmt.Printf("Running invoke")\n';
-	code += '    var USER_A, USER_B string\n';
-	code += '    var Aval, Bval int\n';
-	code += '    var MONEY int\n';
-	code += '    var err error\n';
-	code += '    USER_A = \"' + usera_name + '\"\n';
-	code += '    USER_B = \"' + userb_name + '\"\n';
-	code += '    USER_A_val_bytes, err := stub.GetState(USER_A) \n';
-	code += '    if err != nil {\n';
-	code += '      return shim.Error("Failed to get state")\n';
-	code += '    }\n';
-	code += '    if USER_A_val_bytes == nil {\n';
-	code += '      return shim.Error("Entity not found")\n';
-	code += '    }\n';
-	code += '    Aval, _ = strconv.Atoi(string(USER_A_val_bytes))\n';
-	code += '    USER_B_val_bytes, err := stub.GetState(USER_B)\n';
-	code += '    if err != nil {\n';
-	code += '      return shim.Error("Failed to get state")\n';
-	code += '    }\n';
-	code += '    if USER_B_val_bytes == nil {\n';
-	code += '      return shim.Error("Entity not found")\n';
-	code += '    }\n';
-	code += '    Bval, _ = strconv.Atoi(string(USER_B_val_bytes))\n';
-	code += '    MONEY, err = strconv.Atoi(\"' + money + '\")\n';
-	code += '    Aval = Aval -' + money + '\n';
-	code += '    Bval = Bval +' + money + '\n';
-	code += '    fmt.Printf("Aval = %d, Bval = %d\n", Aval, Bval)\n';
-	code += '    err = stub.PutState(USER_A, []byte(strconv.Itoa(Aval)))\n';
-	code += '    if err != nil {\n';
-	code += '      return shim.Error(err.Error())\n';
-	code += '    }\n';
-	code += '    err = stub.PutState(USER_B, []byte(strconv.Itoa(Bval)))\n';
-	code += '    if err != nil {\n';
-	code += '      return shim.Error(err.Error())\n';
-	code += '    }\n';
-	code += '    return shim.Success(nil)\n';
-	code += '}\n';
+	var code = `function invoke (t *SimpleChaincode) {
+
+	}`
 	return code;
 };
 Blockly.Solidity.chaincode_query = function(block) {
@@ -380,25 +317,24 @@ Blockly.Solidity.chaincode_query = function(block) {
 	var value_user_query = Blockly.Solidity.valueToCode(block, 'user_Query', Blockly.Solidity.ORDER_ATOMIC);
 	// TODO: Assemble Solidity into code variable.
 	var functionName = 'a';
-	var code = 'function '+ functionName +' (t *SimpleChaincode) Query(stub shim.ChaincodeStub, args []string) pb.Response {\n';
-	code += '    fmt.Printf("Running query")\n';
-	code += '    var user_name string \n';
-	code += '    var err error \n';
+	var code =`function record(string _id, string _catEvent, string _optKey, string _optVal, string _dsc, string _data) onlyOwner returns(bool){
+	RecordIndex ix = recordIndexs[_id];
+	string catEvent = ix.catEvent;
+	require(keccak256("") == keccak256(catEvent), "id已存在");
+
+	records[_catEvent].push(Record(_optKey, _optVal, _dsc, _data, now));
+	recordIndexs[_id] = RecordIndex(_catEvent, records[_catEvent].length-1);
+
+	return true;
+	}`
+	code += 'function '+ functionName +' (t *SimpleChaincode) Query(stub shim.ChaincodeStub, args []string) pb.Response {\n';
+
 	code += '    user_name = \"' + value_user_query + '\"\n';
-	code += '    user_name_val, err := stub.GetState(user_name) \n';
-	code += '    if err != nil {\n';
-	code += '      jsonResp := "{\\"Error\\":\\"Failed to get state for " + user_name + "\\"}"\n';
-	code += '      return shim.Error(jsonResp)\n';
-	code += '    }\n';
 	if(checkbox_check_query_security == true) {
 		code += '    if user_name_val == nil {\n';
-		code += '      jsonResp := "{\\"Error\\":\\"Nil amount for " + user_name + "\\"}"\n';
-		code += '      return shim.Error(jsonResp)\n';
 		code += '    }\n';
 	}
-	code += '    jsonResp := "{\\"Name\":\\"" + user_name + "\\",\\"Amount\\":\\"" + string(user_name_val) + "\\"}" \n';
-	code += '    fmt.Printf("Query Response:%s\\n", jsonResp) \n';
-	code += '    return shim.Success(user_name_val)\n';
+
 	code += '}\n';
 	return code;
 };
@@ -407,14 +343,9 @@ Blockly.Solidity.chaincode_delete = function(block) {
 	var value_user_delete = Blockly.Solidity.valueToCode(block, 'user_Delete', Blockly.Solidity.ORDER_ATOMIC);
 	// TODO: Assemble Solidity into code variable.
 
-	var code = 'func (t *SimpleChaincode) delete(stub shim.ChaincodeStub, args []string) ([]byte, error) {\n';
-	code += '    fmt.Printf("Running delete")\n';
+	var code = 'function delete(variable){\n';
 	code += '    user_name := \"' + value_user_delete + '\"\n';
 	code += '    err := stub.DelState(user_name)\n';
-	code += '    if err != nil {\n';
-	code += '       return shim.Error("Failed to delete state")\n';
-	code += '    }\n';
-	code += '    return shim.Success(nil)\n';
 	code += '}\n';
 	return code;
 };
@@ -426,12 +357,7 @@ Blockly.Solidity.set_value = function(block) {
 	var valuable_val = variable_name + 'val';
 	var valuable_err = 'err_' + variable_name;
 
-	var code = 'var ' + variable_name + ' string; \n';
-	code += 'var ' + valuable_val + ' int; \n';
-	code += 'var ' + valuable_err + ' error; \n';
-
-	code += variable_name + ' = ' + '\"' + variable_name + '\"' + '\n';
-	code += valuable_val + ',' + valuable_err + ' = strconv.Atoi(\"' + variable_value + '\")\n';
+	var code = `${variable_name}\ solidity contract variables init${valuable_val}`
 	if(checkbox_flag == true) {
 		code += 'if ' + valuable_err + '!= nil { \n	return shim.Error("Expecting integer value for asset holding")\n}\n';
 	}
