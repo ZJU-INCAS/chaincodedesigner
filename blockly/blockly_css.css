@@ -1,62 +1,46 @@
-.firstline{
-  background-color:1ABC9C;
-  position:right;
-  font-size:30px;
-  padding:0px;
-  padding-left:6px;
-  padding-bottom:6px;
-  margin:0px;
-  width:auto;
-  height:40px;
+.designerWrapper{
+  width:100%;
+  height:768px;
+  flex-flow: column;
+  display:flex;
+  border: 1px solid rgba(188,188,188,.56);
 }
 
-.lastline{
-  background-color:#FFF;
-  position:absolute;
-  font-size:20px;
-  bottom:0px;
-  width:95%;
-  height:25px;
-  padding:0;
-  text-align:left;
-  text-shadow:#333333;
+.firstline{
+  text-align: left;
+  width: 100%;
+  font-size:30px;
+  line-height: 40px;
+  margin:0;
 }
 
 .app-container {
-  position: absolute;
-  margin-left: auto;
-  margin-right: auto;
-  top: 45px;
-  bottom: 25px;
-  left: 0;
-  right: 0;
+  width:100%;
+  height: 100%;
   overflow: visible;
-  background-color:1ABC9C;
-  box-shadow: 0 0 4px rgba(0,0,0,.14),0 4px 8px rgba(0,0,0,.28);
-  margin: 10px;
+  flex: 1;
+  flex-flow: row;
+  display: flex;
+  border-top: 1px solid rgba(188,188,188,.56);
 }
+
 
 .main {
-  position: absolute;
-  top: 8px;
-  bottom: 8px;
+  height:100%;
 }
-
-.blockly-panel {
-  left: 8px;
-  right: 382px;
-  box-shadow: 0 1px 4px rgba(0,0,0,.37);
+.blockly-panel{
+  float:left;
+  width:65%;
+  border-right: 1px solid rgba(188,188,188,.56);
 }
-
 .output-panel {
-  right: 8px;
-  width: 350px;
-  height: 350px;
+  float:right;
+  flex:1;
   background-color: white;
   overflow: scroll;
-  padding: 8px;
-  box-shadow: 0 1px 4px rgba(0,0,0,.37);
 }
+
+
 
 .output-panel-natural {
   right: 8px;

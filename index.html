@@ -19,48 +19,50 @@
 
 <body>
 	
-	<div class="firstline" onload="hello();"> Chaincode Designer beta V0.0.4
-		<button onClick="deleteWorkspace()" id="trashButton" class="space"> <img src='blockly/media/1x1.gif' class="trash icon21"> </button>
-		<button id="linkButton" class="space"> <img src='blockly/media/1x1.gif' class="link icon21"> </button>
-		<button onClick="loadWorkspace()" class="space">Reload Blocks</button>
-		<button onClick="saveWorkspace()" class="space">Save Blocks</button>
-		<button onClick="saveXML()" class="space">SaveXML</button>
-		<button onClick="files.click()" class="space">LoadXML</button>
-		<input type="file" id="files" onChange="loadXML()" name="myFile" accept="application/xml" style="position:absolute; filter:alpha(opacity=0); opacity:0; width:30px; " />
-		<button onClick="saveGO()" class="space">SaveGo</button>
-		<button onClick="Blockly.mainWorkspace.undo()" class="space">Undo</button>
-		<button onClick="Blockly.mainWorkspace.undo(true)" class="space">Redo</button>
-	</div>
-	<div class="app-container">
-		<div id="blocklyDiv" class="main blockly-panel" style="width:55%"></div>
-		<div id="codeDiv" class="main output-panel"style="width:42.5%;height:96.5%" >
-			<div class="dropdown-bar"> Language:
-				<div id="im-just-an-underline">
-					<select id="languageDropdown" class="languageDropdown" onChange="myUpdateFunction();">
-						<option value="Go" selected="selected">Go</option>
-						<option value="Solidity">Solidity</option>
-						<option value="Natural">Natural</option>
-					</select>
-				</div>
-			</div>
-			<hr class="POps">
-			<pre></pre>
+	<div class="designerWrapper">
+		<div class="firstline" onload="hello();"> Chaincode Designer beta V0.0.4
+			<button onClick="deleteWorkspace()" id="trashButton" class="space"> <img src='blockly/media/1x1.gif' class="trash icon21"> </button>
+			<button id="linkButton" class="space"> <img src='blockly/media/1x1.gif' class="link icon21"> </button>
+			<button onClick="loadWorkspace()" class="space">Reload Blocks</button>
+			<button onClick="saveWorkspace()" class="space">Save Blocks</button>
+			<button onClick="saveXML()" class="space">SaveXML</button>
+			<button onClick="files.click()" class="space">LoadXML</button>
+			<input type="file" id="files" onChange="loadXML()" name="myFile" accept="application/xml" style="position:absolute; filter:alpha(opacity=0); opacity:0; width:30px; " />
+			<button onClick="saveGO()" class="space">SaveGo</button>
+			<button onClick="Blockly.mainWorkspace.undo()" class="space">Undo</button>
+			<button onClick="Blockly.mainWorkspace.undo(true)" class="space">Redo</button>
 		</div>
-		<div id="codeDiv2" class="main output-panel-natural"style="display: none;">
-			<div class="dropdown-bar"> Language:
-				<div id="im-just-an-underline">
-					<select id="languageDropdown2" class="languageDropdown" onChange="myUpdateFunction();">
-						<option value="Go">Go</option>
-						<option value="Solidity">Solidity</option>
-						<option value="Natural" selected="selected">Natural</option>
-					</select>
+		<div class="app-container">
+			<div id="blocklyDiv" class="main blockly-panel"></div>
+			<div id="codeDiv" class="main output-panel">
+				<div class="dropdown-bar"> Language:
+					<div id="im-just-an-underline">
+						<select id="languageDropdown" class="languageDropdown" onChange="myUpdateFunction();">
+							<option value="Go" selected="selected">Go</option>
+							<option value="Solidity">Solidity</option>
+							<option value="Natural">Natural</option>
+						</select>
+					</div>
 				</div>
+				<hr class="POps">
+				<pre></pre>
 			</div>
-			<hr class="POps">
-			<pre></pre>
+			<div id="codeDiv2" class="main output-panel-natural"style="display: none;">
+				<div class="dropdown-bar"> Language:
+					<div id="im-just-an-underline">
+						<select id="languageDropdown2" class="languageDropdown" onChange="myUpdateFunction();">
+							<option value="Go">Go</option>
+							<option value="Solidity">Solidity</option>
+							<option value="Natural" selected="selected">Natural</option>
+						</select>
+					</div>
+				</div>
+				<hr class="POps">
+				<pre></pre>
+			</div>
 		</div>
+		<div style="display:none" id="playButton" class="play-button material-icons">Run</div>
 	</div>
-	<div style="display:none" id="playButton" class="play-button material-icons">Run</div>
 	<xml id="toolbox" style="display: none">
 		<category name=" 初始化 " colour="100" expanded="false">
 			<block type="chaincode_init">
